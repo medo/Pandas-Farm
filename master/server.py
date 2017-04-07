@@ -4,7 +4,6 @@ from xmlrpc.server import SimpleXMLRPCRequestHandler
 from master.server_handler import ServerHandler
 from xmlrpc.client import Binary
 
-
 HOST = "0.0.0.0"
 PORT = int(os.getenv('PORT', 5555))
 ENDPOINT = 'RPC2'
@@ -15,7 +14,6 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     # rpc_paths = ('RPC2',)
     def log_message(self, format, *args):
         logging.debug(format)
-
 
 def start():
     server = SimpleXMLRPCServer((HOST, PORT), requestHandler=RequestHandler,

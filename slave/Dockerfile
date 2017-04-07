@@ -9,6 +9,4 @@ RUN git clone https://github.com/medo/Cluster-Pandas.git
 
 WORKDIR Cluster-Pandas
 
-EXPOSE 5555
-
 CMD python3 start_slave.py
