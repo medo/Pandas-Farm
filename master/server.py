@@ -6,7 +6,7 @@ from xmlrpc.client import Binary
 
 
 HOST = "0.0.0.0"
-PORT = os.getenv('PORT', 5555)
+PORT = int(os.getenv('PORT', 5555))
 ENDPOINT = 'RPC2'
 
 logging.basicConfig(level=logging.INFO)
