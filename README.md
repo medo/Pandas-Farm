@@ -20,7 +20,7 @@ Now the master is running, and you can schedule operations. In order to process 
 
 Now you ready to play with cluster pandas. All you need to do is create a function that takes a dataframe and returns a dataframe.
 
-```
+```python
 iris = ...
 
 def area(df):
@@ -31,7 +31,7 @@ def area(df):
 
 And now run your function on the iris dataframe
 
-```
+```python
 from clpandas.driver import ClusterPandas
 
 cl = ClusterPandas('MASTER_HOST')
@@ -42,18 +42,18 @@ job = cl.parallelize(iris, area, 8)
 
 You can check the progress of the operatiosn
 
-```
+```python
 print("Progress = %d%" % cl.progress(job))
 ```
 
 To get the result of the operation
 
-```
+```python
 cl.collect(job)
 ```
 The result we get here is a single dataframe, in fact cluster pandas runs a merge function on partiions to return reduce the paritions to a single result, by default the function is `pd.concat`. You can get the raw result of the paritions or pass a different merge function
 
-```
+```python
 cl.parallelize(iris, apply = area, merge = None)
 
 ```
