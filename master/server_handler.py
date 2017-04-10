@@ -31,11 +31,13 @@ class ServerHandler:
         return self.task_id
 
     def submit_result(self, partition_id, res):
+        print("Partition %s submitted" % partition_id )
         task_id = self.scheduler.finish_task(partition_id)
         if task_id != None:
+            res = deserialize(res)
             self.task_progress[task_id]["progress"] += 1
             self.result.setdefault(task_id, [])
-            self.result[task_id].append(deserialize(res))
+            self.result[task_id].append(res)
 
     def offer_resources(self, partitions):
         assigned_tasks = self.scheduler.select_tasks(partitions)
@@ -43,6 +45,9 @@ class ServerHandler:
 
     def ready(self, task_id):
         return self.task_progress[task_id]["total"] == self.task_progress[task_id]["progress"]
+
+    def progress(self, task_id):
+        return self.task_progress[task_id]["progress"] * 100.0 / self.task_progress[task_id]["total"]
 
     def collect(self, task_id):
         return serialize(self.result[task_id])

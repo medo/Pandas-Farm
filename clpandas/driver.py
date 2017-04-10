@@ -17,4 +17,7 @@ class ClusterPandas:
     def ready(self, task_id):
         return self.master.ready(task_id)
 
+    def progress(self, task_id):
+    	return self.master.progress(task_id)
+
 
