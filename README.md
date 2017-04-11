@@ -1,6 +1,6 @@
 # Cluster Pandas
 
-Parallelize your pandas dataframe operation across your cluster.
+An easy tool to parallelize and distribute your pandas dataframe operation across your cluster or your personal machines.
 
 ## Getting Started
 
@@ -60,9 +60,15 @@ cl.parallelize(iris, apply = area, merge = None)
 
 ## Manage Dependenices
 
+### Run inside your own Containe
 
 ## Provision slaves with AWS Spot Instances
 
 
 ## Architecture
 
+## Why I built this
+
+## Future Work
+
+- Automatically pass a docker container as a dependency of a function instead of restarting the slaves

@@ -24,12 +24,11 @@ def start():
         time.sleep(1)
         res = serverProxy.offer_resources(n_process)
         tasks = deserialize(res)
-        print(tasks)
         for task in tasks:
             task['func'] = serialize(task['func'])
         if tasks:
+            print("Executing Partitions: %s" % str(list(map(lambda t: t["partition_id"], tasks))))
             results = parallelize_dataframe(tasks, n_process, execute_function)
             for result in results:
-                print(type(result["result"]))
                 serverProxy.submit_result(result["partition_id"], serialize(result["result"]))
 

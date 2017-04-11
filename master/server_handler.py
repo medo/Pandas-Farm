@@ -13,31 +13,39 @@ class ServerHandler:
         self.task_progress = {}
         self.result = {}
         self.scheduler = Scheduler() 
+        self.merger = {}
 
     def hand_shake(self, paritions):
         #self.total_partitions += paritions
         print("Slave Connected")
 
-    def schedule_task(self, df, func, partitions=DEFAULT_PARTITIONS):
+    def schedule_task(self, df, func, partitions, merger):
         self.task_id += 1
-        df = deserialize(df)
-        func = deserialize(func)
+        print("Task %d Scheduled with partitions preference = %d" % (self.task_id, partitions))
+        df, func, merger = deserialize(df), deserialize(func), deserialize(merger)
         task = {"df": df, "func": func, "priority": 0, "task_id": self.task_id}
         self.task_progress.setdefault(task["task_id"], {"total": 0, "progress": 0})
-        print(partitions)
         splitted_task = partition.split_task(task, partitions)
         self.task_progress[task["task_id"]]["total"] += len(splitted_task) 
+        if merger:
+            self.merger[task["task_id"]] = merger
         self.scheduler.schedule_tasks(splitted_task)
         return self.task_id
 
     def submit_result(self, partition_id, res):
-        print("Partition %s submitted" % partition_id )
+        print("Partition %s submitted" % partition_id)
         task_id = self.scheduler.finish_task(partition_id)
         if task_id != None:
             res = deserialize(res)
             self.task_progress[task_id]["progress"] += 1
-            self.result.setdefault(task_id, [])
-            self.result[task_id].append(res)
+            if task_id in self.merger:
+                if task_id in self.result:
+                    self.result[task_id] = self.merger[task_id](self.result[task_id], res)
+                else:
+                    self.result[task_id] = res
+            else:
+                self.result.setdefault(task_id, [])
+                self.result[task_id].append(res)
 
     def offer_resources(self, partitions):
         assigned_tasks = self.scheduler.select_tasks(partitions)
