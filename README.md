@@ -30,7 +30,7 @@ def area(df):
 
 ```
 
-And now run your function on the iris dataframe
+Let's try our function on iris dataset.
 
 ```python
 from clpandas.driver import PandaFarm
