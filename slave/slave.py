@@ -21,6 +21,7 @@ def execute_function(task):
             }
 
 def start():
+    print("Connecting to: %s:%s" % (HOST, PORT))
     serverProxy.hand_shake(n_process)
     while True:
         time.sleep(1)
