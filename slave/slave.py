@@ -4,7 +4,7 @@ import time, xmlrpc.client
 import numpy as np
 
 HOST = os.getenv('CL_MASTER_HOST', 'http://127.0.0.1')
-PORT = int(os.getenv('CL_MASTER_PORT', 5555))
+PORT = os.getenv('CL_MASTER_PORT', 5555)
 serverProxy = xmlrpc.client.ServerProxy(HOST + ':' + PORT, use_builtin_types=True)
 n_process = multiprocessing.cpu_count()
 
