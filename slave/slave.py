@@ -1,5 +1,5 @@
 from common.serializer import serialize, deserialize
-import multiprocessing, os
+import multiprocessing, os, concurrent.futures
 import time, xmlrpc.client
 import numpy as np
 
@@ -9,11 +9,9 @@ serverProxy = xmlrpc.client.ServerProxy("http://%s:%s" % (HOST, PORT), use_built
 n_process = multiprocessing.cpu_count()
 
 def parallelize_dataframe(tasks, num_partitions, func):
-    pool = multiprocessing.Pool(num_partitions)
-    result = pool.map(func, tasks)
-    pool.close()
-    pool.join()
-    return result
+    with concurrent.futures.ThreadPoolExecutor(n_process) as executor:
+        result = executor.map(func, tasks)
+        return result
 
 def execute_function(task):
     return {    "partition_id": task["partition_id"],
