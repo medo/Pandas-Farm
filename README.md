@@ -44,7 +44,7 @@ job = cl.parallelize(iris, area, 10)
 You can check the progress of the operatiosn
 
 ```python
-print("Progress = %d%" % cl.progress(job))
+print("Progress = %d / 100" % cl.progress(job))
 ```
 
 To get the result of the operation
