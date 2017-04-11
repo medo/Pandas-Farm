@@ -4,8 +4,8 @@ import time, xmlrpc.client
 import numpy as np
 
 HOST = os.getenv('CL_MASTER_HOST', 'http://127.0.0.1')
-PORT = os.getenv('CL_MASTER_PORT', 5555)
-serverProxy = xmlrpc.client.ServerProxy(HOST + ':' + PORT, use_builtin_types=True)
+PORT = os.getenv('CL_MASTER_PORT', "5555")
+serverProxy = xmlrpc.client.ServerProxy("http://%s:%s" % (HOST, PORT), use_builtin_types=True)
 n_process = multiprocessing.cpu_count()
 
 def parallelize_dataframe(tasks, num_partitions, func):
@@ -21,7 +21,7 @@ def execute_function(task):
             }
 
 def start():
-    print("Connecting to: %s:%s" % (HOST, PORT))
+    print("Connected to: %s:%s" % (HOST, PORT))
     serverProxy.hand_shake(n_process)
     while True:
         time.sleep(1)
