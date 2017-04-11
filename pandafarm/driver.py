@@ -7,7 +7,7 @@ def default_merger(x, y):
 	import pandas as pd
 	return pd.concat([x, y])
 
-class ClusterPandas:
+class PandaFarm:
 
     def __init__(self, master_url='http://127.0.0.1:5555'):
         self.master_url = master_url

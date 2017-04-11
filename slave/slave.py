@@ -9,6 +9,7 @@ serverProxy = xmlrpc.client.ServerProxy("http://%s:%s" % (HOST, PORT), use_built
 n_process = multiprocessing.cpu_count()
 
 def parallelize_dataframe(tasks, num_partitions, func):
+    print(func)
     with concurrent.futures.ThreadPoolExecutor(n_process) as executor:
         result = executor.map(func, tasks)
         return result

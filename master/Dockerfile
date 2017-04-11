@@ -5,9 +5,9 @@ MAINTAINER <mohamed@farghal.com>
 ENV PORT=5555
 
 RUN pip3 install numpy dill pandas
-RUN git clone https://github.com/medo/Cluster-Pandas.git
+RUN git clone https://github.com/medo/Pandas-Farm.git
 
-WORKDIR Cluster-Pandas
+WORKDIR Pandas-Farm
 
 EXPOSE 5555
 

@@ -1,4 +1,4 @@
-# Cluster Pandas
+# Panda Farm
 
 An easy tool to parallelize and distribute your pandas dataframe operation across your cluster or your personal machines.
 
@@ -8,13 +8,13 @@ An easy tool to parallelize and distribute your pandas dataframe operation acros
 
 In order to use Cluster Pandas you need a netwrok accessible master running. If you have docker installed in the master machine, just run
 
-`docker run -p 5555:5555 medo/clmaster`
+`docker run -p 5555:5555 medo/farm-master`
 
 ### Slave
 
 Now the master is running, and you can schedule operations. In order to process operations you need at least one slave running. In your slave machine run
 
-`docker run medo/clpandas CL_MASTER_HOST=<YOUR_MASTR_URL>`
+`docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-slave`
 
 ### Driver
 
@@ -33,30 +33,30 @@ def area(df):
 And now run your function on the iris dataframe
 
 ```python
-from clpandas.driver import ClusterPandas
+from clpandas.driver import PandaFarm
 
-cl = ClusterPandas('<MASTER_HOST>')
+pf = PandaFarm('<MASTER_HOST>')
 
-job = cl.parallelize(iris, area, 10)
+job = pf.parallelize(iris, area, 10)
 
 ```
 
 You can check the progress of the operatiosn
 
 ```python
-print("Progress = %d / 100" % cl.progress(job))
+print("Progress = %d / 100" % pf.progress(job))
 ```
 
 To get the result of the operation
 
 ```python
-result = cl.collect(job)
+result = pf.collect(job)
 ```
 
 The result we get here is a single dataframe, in fact cluster pandas runs a merge function on partiions to reduce the paritions into a single result, by default the function is `pd.concat`. You can get the raw result of the paritions or pass a different merge function
 
 ```python
-cl.parallelize(iris, apply = area, merge = None)
+pf.parallelize(iris, apply = area, merge = None)
 
 ```
 
