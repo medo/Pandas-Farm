@@ -6,7 +6,7 @@ An easy tool to parallelize and distribute your pandas dataframe operation acros
 
 ### Master
 
-In order to use Cluster Pandas you need a netwrok accessible master running. If you have docker installed in the master machine, just run
+In order to use Panda Farm you need a netwrok accessible master running. If you have docker installed in the master machine, just run
 
 `docker run -p 5555:5555 medo/farm-master`
 
@@ -18,7 +18,7 @@ Now the master is running, and you can schedule operations. In order to process 
 
 ### Driver
 
-Now you ready to play with cluster pandas. All you need to do is create a function that takes a dataframe and returns a dataframe.
+Now you ready to play with Panda Farm. All you need to do is create a function that takes a dataframe and returns a dataframe.
 
 ```python
 import pandas.rpy.common as rcom
@@ -53,7 +53,7 @@ To get the result of the operation
 result = pf.collect(job)
 ```
 
-The result we get here is a single dataframe, in fact cluster pandas runs a merge function on partiions to reduce the paritions into a single result, by default the function is `pd.concat`. You can get the raw result of the paritions or pass a different merge function
+The result we get here is a single dataframe, However, Panda Farm runs a merge function on partiions to reduce the paritions into a single result, by default the function is `pd.concat`. You can get the raw result of the paritions or pass a different merge function
 
 ```python
 pf.parallelize(iris, apply = area, merge = None)
