@@ -15,7 +15,7 @@ def parallelize_dataframe(tasks, num_partitions, func):
 
 def execute_function(task):
     return {    "partition_id": task["partition_id"],
-                "result": deserialize(task["func"])(task["df"])
+                "result": task["func"](task["df"])
             }
 
 def start():
@@ -25,8 +25,6 @@ def start():
         time.sleep(1)
         res = serverProxy.offer_resources(n_process)
         tasks = deserialize(res)
-        for task in tasks:
-            task['func'] = serialize(task['func'])
         if tasks:
             print("Executing Partitions: %s" % str(list(map(lambda t: t["partition_id"], tasks))))
             results = parallelize_dataframe(tasks, n_process, execute_function)
