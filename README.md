@@ -8,13 +8,17 @@ An easy tool to parallelize and distribute your pandas dataframe operation acros
 
 In order to use Panda Farm you need a netwrok accessible master running. If you have docker installed in the master machine, just run
 
-`docker run -p 5555:5555 medo/farm-master`
+```bash
+docker run -p 5555:5555 medo/farm-master
+```
 
 ### Slave
 
 Now the master is running, and you can schedule operations. In order to process operations you need at least one slave running. In your slave machine run
 
-`docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-slave`
+```bash 
+docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-slave
+```
 
 ### Driver
 
@@ -68,7 +72,7 @@ In order to be able to install libraries in the slaves. You will need to create 
 
 Create a Dockerfile
 
-```
+```bash
 FROM medo/farm-slave
 
 MAINTAINER <example@mail.com>
@@ -78,13 +82,13 @@ RUN pip3 install nltk
 
 Now build the image
 
-```
+```bash
 docker build -t <image_name> . 
 ```
 
 Push it to the registery
 
-```
+```bash
 docker push <image_name>
 ```
 
@@ -92,7 +96,7 @@ docker push <image_name>
 
 Now you need to run your image on the slaves
 
-```
+```bash
 docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-slave
 ```
 
@@ -101,7 +105,8 @@ docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-s
 Watch tower is a docker image that enables you to automatically update your containers. check this post http://www.ecliptik.com/Automating-Container-Updates-With-Watchtower/
 
 All you need to do is to run watchtower container on the slaves
-```
+
+```bash
 docker run -d  --name watchtower  -v /var/run/docker.sock:/var/run/docker.sock centurylink/watchtower --interval 10 <image_name>
 ```
 
