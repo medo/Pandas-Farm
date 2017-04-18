@@ -1,17 +1,17 @@
-# Panda Farm
+# Pandas Farm
 
-An easy tool to parallelize and distribute your python pandas dataframe operation across your cluster or your personal machines. Although, in theory, you can distribute arbitrary python functions with Panda-Farm but it was built and tested to work with Pandas Dataframes
+An easy tool to parallelize and distribute your python pandas dataframe operation across your cluster or your personal machines. Although, in theory, you can distribute arbitrary python functions with Pandas-Farm but it was built and tested to work with Pandas Dataframes
 
 ## Getting Started
 
-To quickly get started with Panda Farm you need 3 instacens running
+To quickly get started with Pandas Farm you need 3 instacens running
 - Master: to mange, schedule and relay the data
 - Slave(s): to compute the functions
-- Driver: from which you can submit code to Panda Farm cluster 
+- Driver: from which you can submit code to Pandas Farm cluster 
 
 ### Master
 
-In order to use Panda Farm you need a netwrok accessible master running. If you have docker installed in the master machine, just run
+In order to use Pandas Farm you need a netwrok accessible master running. If you have docker installed in the master machine, just run
 
 ```bash
 docker run -p 5555:5555 medo/farm-master
@@ -27,7 +27,7 @@ docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-s
 
 ### Driver
 
-Now you ready to play with Panda Farm. All you need to do is create a function that takes a dataframe and returns a dataframe.
+Now you ready to play with Pandas Farm. All you need to do is create a function that takes a dataframe and returns a dataframe.
 
 ```python
 import pandas.rpy.common as rcom
@@ -50,7 +50,7 @@ job = pf.parallelize(iris, area, 10)
 
 ```
 
-You can check the progress of the operatiosn
+You can check the progress of the operation
 
 ```python
 print("Progress = %d / 100" % pf.progress(job))
@@ -136,4 +136,4 @@ TODO...
 - Support different Python versions
 - Automatically pass a docker container as a dependency of a function instead of restarting the slaves
 - Shadow Master failure recovery
-- Effiecient Distribute Merging
+- Effiecient Distributed Merging
