@@ -27,7 +27,7 @@ docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-s
 
 ### Driver
 
-Now you ready to play with Pandas Farm. All you need to do is create a function that takes a dataframe and returns a dataframe.
+Now you are ready to play with Pandas Farm. All you need to do is create a function that takes a dataframe and returns a dataframe.
 
 ```python
 import pandas.rpy.common as rcom
@@ -136,4 +136,5 @@ TODO...
 - Support different Python versions
 - Automatically pass a docker container as a dependency of a function instead of restarting the slaves
 - Shadow Master failure recovery
+- Secuirty Tokens
 - Effiecient Distributed Merging
