@@ -127,7 +127,7 @@ TODO...
 
 ## Architecture
 
-![alt tag](https://raw.githubusercontent.com/medo/panda-farm/master/architechture-digram.jpeg)
+![alt tag](https://github.com/medo/Pandas-Farm/blob/master/architecture-diagram.jpeg)
 
 ## Why I built this
 
