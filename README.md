@@ -5,8 +5,8 @@ An easy tool to parallelize and distribute your python pandas dataframe operatio
 ## Getting Started
 
 To quickly get started with Panda Farm you need 3 instacens running
-- Master: which manges, schedules and relay the data
-- Slave(s): which compute the functions
+- Master: to mange, schedule and relay the data
+- Slave(s): to compute the functions
 - Driver: from which you can submit code to Panda Farm cluster 
 
 ### Master
@@ -126,6 +126,8 @@ Now you have everything set up. All you need to do to install new dependencies f
 TODO...
 
 ## Architecture
+
+![alt tag](https://raw.githubusercontent.com/medo/panda-farm/master/architechture-digram.jpeg)
 
 ## Why I built this
 
