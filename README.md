@@ -1,8 +1,13 @@
 # Panda Farm
 
-An easy tool to parallelize and distribute your pandas dataframe operation across your cluster or your personal machines.
+An easy tool to parallelize and distribute your python pandas dataframe operation across your cluster or your personal machines. Although, in theory, you can distribute arbitrary python functions with Panda-Farm but it was built and tested to work with Pandas Dataframes
 
 ## Getting Started
+
+To quickly get started with Panda Farm you need 3 instacens running
+- Master: which manges, schedules and relay the data
+- Slave(s): which compute the functions
+- Driver: from which you can submit code to Panda Farm cluster 
 
 ### Master
 
