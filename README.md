@@ -102,7 +102,7 @@ docker push <image_name>
 Now you need to run your image on the slaves
 
 ```bash
-docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-slave
+docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  <image_name>
 ```
 
 ### Run watchtower
