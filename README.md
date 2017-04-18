@@ -62,10 +62,58 @@ pf.parallelize(iris, apply = area, merge = None)
 
 ## Manage Dependenices
 
-### Run inside your own Containe
+In order to be able to install libraries in the slaves. You will need to create your own docker image, push it to the registery and then you can use your image to install the dependecies.
+
+### Run inside your own Container
+
+Create a Dockerfile
+
+```
+FROM medo/farm-slave
+
+MAINTAINER <example@mail.com>
+
+RUN pip3 install nltk
+```
+
+Now build the image
+
+```
+docker build -t <image_name> . 
+```
+
+Push it to the registery
+
+```
+docker push <image_name>
+```
+
+### Run the image on the slaves
+
+Now you need to run your image on the slaves
+
+```
+docker run -e "CL_MASTER_HOST=<MASTER_IP>" -e "CL_MASTER_PORT=5555"  medo/farm-slave
+```
+
+### Run watchtower
+
+Watch tower is a docker image that enables you to automatically update your containers. check this post http://www.ecliptik.com/Automating-Container-Updates-With-Watchtower/
+
+All you need to do is to run watchtower container on the slaves
+```
+docker run -d  --name watchtower  -v /var/run/docker.sock:/var/run/docker.sock centurylink/watchtower --interval 10 <image_name>
+```
+
+if you don't specify `<image_name>` then all the container on the slave machine will be included in the update script
+
+### Update your Image
+
+Now you have everything set up. All you need to do to install new dependencies for your script is to install the dependency on the docker container and push it with the same name  `<image_name>` 
 
 ## Provision slaves with AWS Spot Instances
 
+TODO...
 
 ## Architecture
 
@@ -73,4 +121,7 @@ pf.parallelize(iris, apply = area, merge = None)
 
 ## Future Work
 
+- Support different Python versions
 - Automatically pass a docker container as a dependency of a function instead of restarting the slaves
+- Shadow Master failure recovery
+- Effiecient Distribute Merging
