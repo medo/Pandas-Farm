@@ -71,7 +71,7 @@ pf.parallelize(iris, apply = area, merge = None)
 
 ## Manage Dependenices
 
-In order to be able to install libraries in the slaves. You will need to create your own docker image, push it to the registery and then you can use your image to install the dependecies.
+In order to be able to install libraries on your slaves. You will need to create your own docker image, push it to the registery and then you can use your image to install the dependecies.
 
 ### Run inside your own Container
 
@@ -133,8 +133,8 @@ TODO...
 
 ## Future Work
 
-- Support different Python versions
-- Automatically pass a docker container as a dependency of a function instead of restarting the slaves
-- Shadow Master failure recovery
-- Secuirty Tokens
-- Effiecient Distributed Merging
+- User Docker-In-Docker for running jobs
+- Shadow Master for failure recovery
+- Redis store for intermediate jobs execution
+- Security Tokens
+- Efficient Scheduler based on resources costs 
