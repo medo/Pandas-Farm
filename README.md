@@ -62,7 +62,7 @@ To get the result of the operation
 result = pf.collect(job)
 ```
 
-The result we get here is a single dataframe, However, Panda Farm runs a merge function on partiions to reduce the paritions into a single result, by default the function is `pd.concat`. You can get the raw result of the paritions or pass a different merge function
+The result we get here is a single dataframe, However, Panda Farm runs a merge function on partitions to reduce the partitions into a single result, by default the function is `pd.concat`. You can get the raw result of the paritions or pass a different merge function
 
 ```python
 pf.parallelize(iris, apply = area, merge = None)
