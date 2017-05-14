@@ -42,7 +42,7 @@ def area(df):
 Let's try our function on iris dataset.
 
 ```python
-from clpandas.driver import PandaFarm
+from pandafarm.driver import PandaFarm
 
 pf = PandaFarm('<MASTER_HOST>')
 
