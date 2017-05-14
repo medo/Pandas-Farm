@@ -133,7 +133,7 @@ TODO...
 
 ## Future Work
 
-- User Docker-In-Docker for running jobs
+- Use Docker-In-Docker for running jobs
 - Shadow Master for failure recovery
 - Redis store for intermediate jobs execution
 - Security Tokens
