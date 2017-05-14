@@ -131,6 +131,8 @@ TODO...
 
 ## Why I built this
 
+I built this tool for cost-efficient split/merge workloads on a small cluster, typically machines that you don't have full access to or you can use it to parallelize your existing pandas dataframe transformation code on spot instances AWS cluster for example.  
+
 ## Future Work
 
 - Use Docker-In-Docker for running jobs
